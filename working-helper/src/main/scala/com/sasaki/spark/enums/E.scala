@@ -1,4 +1,4 @@
-package org.sh.spark.enums
+package com.sasaki.spark.enums
 
 /**
  * @Author Sasaki

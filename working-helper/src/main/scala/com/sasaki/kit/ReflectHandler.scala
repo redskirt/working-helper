@@ -1,4 +1,4 @@
-package org.sh.kit
+package com.sasaki.kit
 
 /**
  * @Author Sasaki
@@ -12,6 +12,8 @@ trait ReflectHandler {
 
   lazy val mirror = runtimeMirror(getClass.getClassLoader)
 
+  def getClasspath = this.getClass.getClassLoader.getResource("")
+  
   def getSuccessorName = mirror.classSymbol(getClass).fullName
 
   def getSuccessorPrimaryConstructorArgs = {
@@ -33,5 +35,5 @@ object Main extends App {
   println(rh.getSuccessorName)
   rh.getSuccessorPrimaryConstructorArgs foreach println
   
-  println(this.getClass.getClassLoader.getResource(""))
+  println(rh.getClasspath)
 }

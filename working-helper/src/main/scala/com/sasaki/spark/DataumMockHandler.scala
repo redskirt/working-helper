@@ -1,7 +1,7 @@
-package org.sh.spark
+package com.sasaki.spark
 
-import org.sh.spark.enums.SparkType._
-import org.sh.packages.constant.original._
+import com.sasaki.spark.enums.SparkType._
+import com.sasaki.packages.constant.original._
 
 /**
  * 

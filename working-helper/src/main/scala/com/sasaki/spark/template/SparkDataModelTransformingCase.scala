@@ -1,4 +1,4 @@
-package org.sh.spark.template
+package com.sasaki.spark.template
 
 /**
  * @Author Sasaki
@@ -8,7 +8,7 @@ package org.sh.spark.template
  * 
  * @see http://spark.apache.org/docs/latest/sql-programming-guide.html#datasets-and-dataframes
  */
-object SparkDataModelTransformingCase extends org.sh.spark.SparkHandler {
+object SparkDataModelTransformingCase extends com.sasaki.spark.SparkHandler {
 
 	implicit val spark = buildLocalSparkSession(false)
 

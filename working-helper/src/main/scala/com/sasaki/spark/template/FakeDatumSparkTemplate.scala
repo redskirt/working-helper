@@ -1,18 +1,18 @@
-package org.sh.spark.template
+package com.sasaki.spark.template
 
-import org.sh.{packages => p}
-import org.sh.spark.enums.LaunchMode
-import org.sh.spark.enums.SparkType._
-import org.sh.spark.SparkHandler
-import org.sh.spark.DataumMockHandler
+import com.sasaki.{packages => p}
+import com.sasaki.spark.enums.LaunchMode
+import com.sasaki.spark.enums.SparkType._
+import com.sasaki.spark.SparkHandler
+import com.sasaki.spark.DataumMockHandler
 
 /**
  * @Author Sasaki
  * @Mail wei.liu@suanhua.org
- * @Timestamp 2018-01-08 下午5:18:23
+ * @Timestamp 2018-01-08 上午8:55:23
  * @Description
  */
-object StandardSparkTemplate extends SparkHandler {
+object FakeDatumSparkTemplate extends DataumMockHandler with SparkHandler {
 
   type M = LaunchMode.Value
 
@@ -29,6 +29,11 @@ object StandardSparkTemplate extends SparkHandler {
 
   implicit var _mode_ : M = _
   
+  import com.sasaki.packages.constant.original._
+  override def mock[T: CT] = Nil //List("1", "33", "23")
+  
+//  def create[T]: List[T] = List()
+
   def main(args: Array[String]): Unit = {
     args match {
       case Array() =>
@@ -45,13 +50,16 @@ object StandardSparkTemplate extends SparkHandler {
     /**
      * _spark_ 必须在 _mode_ 之后初始化，避免提前触发 lazy spark 初始化
      */
-    //    implicit val _spark_ = spark
-    //    invokeSessionHandler { () => ??? }
-
-    invokeSparkHandler(spark) { () =>
-      // 测试样例仅本地通过
-      spark.read.textFile(s"${p.reflect.classpath}deploy").rdd
-        .flatMap(_.split(p.constant.$s)).map((_, 1)).reduceByKey(_ + _) foreach println
+        implicit val _spark_ = spark
+    invokeSessionHandler { () =>
+      {
+        if (LaunchMode.isDevelop(_mode_))
+          super.createMockRDD
+        else {
+        	// 测试样例仅本地通过
+        	spark.read.textFile(s"${p.reflect.classpath}deploy").rdd
+        }
+      }//.flatMap(_.split(p.constant.$s)).map((_, 1)).reduceByKey(_ + _) foreach println
     }
   }
 }

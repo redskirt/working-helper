@@ -1,4 +1,4 @@
-package org.sh.spark.template
+package com.sasaki.spark.template
 
 /**
  * @Author Sasaki

@@ -1,7 +1,7 @@
-package org.sh.spark.template
+package com.sasaki.spark.template
 
-import org.sh.spark.enums.SparkType._
-import org.sh.spark.SparkHandler
+import com.sasaki.spark.enums.SparkType._
+import com.sasaki.spark.SparkHandler
 
 /**
  * @Author Sasaki

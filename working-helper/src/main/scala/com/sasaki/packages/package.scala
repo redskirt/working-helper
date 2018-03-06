@@ -1,4 +1,4 @@
-package org.sh.packages
+package com.sasaki.packages
 
 import scala.reflect.runtime.universe._
 

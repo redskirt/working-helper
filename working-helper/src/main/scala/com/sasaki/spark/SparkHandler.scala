@@ -1,9 +1,9 @@
-package org.sh.spark
+package com.sasaki.spark
 
 import com.typesafe.scalalogging.slf4j.LazyLogging
-import org.sh.{packages => p}
-import org.sh.kit.ReflectHandler
-import org.sh.spark.enums.LaunchMode
+import com.sasaki.{packages => p}
+import com.sasaki.kit.ReflectHandler
+import com.sasaki.spark.enums.LaunchMode
 
 /**
  * @Author Sasaki
@@ -14,8 +14,8 @@ import org.sh.spark.enums.LaunchMode
 trait SparkHandler extends ReflectHandler with LazyLogging {
   import p.constant._
   import p.independent._
-  import org.sh.spark.enums._
-  import org.sh.spark.enums.SparkType._
+  import com.sasaki.spark.enums._
+  import com.sasaki.spark.enums.SparkType._
   import Master._
   
   private val SPARK_MASTER = "spark.master"

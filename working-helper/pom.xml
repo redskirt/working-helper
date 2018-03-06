@@ -4,7 +4,7 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	
-	<groupId>org.sh</groupId>
+	<groupId>com.sasaki</groupId>
 	<artifactId>working-helper</artifactId>
 	<version>${local.version}</version>
 	<packaging>jar</packaging>
@@ -23,7 +23,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 
-		<spark.version>2.1.1</spark.version>
+		<spark.version>2.2.1</spark.version>
 		<spark-streaming-kafka.version>1.6.0</spark-streaming-kafka.version>
 		<kafka.deprecated.version> 0.8.2.1 </kafka.deprecated.version>
 		<kafka.version>0.10.2.1-cp2</kafka.version>
@@ -46,16 +46,6 @@
 	</properties>
 
 	<repositories>
-		<!-- <repository>
-			<id>releases</id>
-			<name>local private release</name>
-			<url>http://188.188.33.28:8080/nexus/content/repositories/releases/</url>
-		</repository>
-		<repository>
-			<id>snapshots</id>
-			<name>local private snapshot</name>
-			<url>http://188.188.33.28:8080/nexus/content/repositories/snapshots/</url>
-		</repository> -->
 		<repository>
 			<id>cdh-releases</id> 
 			<name>Cloudera</name>
