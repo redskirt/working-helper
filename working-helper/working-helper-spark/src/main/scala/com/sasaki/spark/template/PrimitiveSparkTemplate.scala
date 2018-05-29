@@ -29,8 +29,8 @@ object PrimitiveSparkTemplate extends SparkHandler {
     /**
      * Option 2
      */
-    invokeSparkHandler(spark) { () =>
-      spark.sparkContext.parallelize(Seq(1 to 10)) foreach println
-    }
+//    invokeSparkHandler(spark) { () =>
+//      spark.sparkContext.parallelize(Seq(1 to 10)) foreach println
+//    }
   }
 } 

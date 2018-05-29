@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.sasaki</groupId>
+		<artifactId>working-helper</artifactId>
+		<version>1.1.2</version>
+	</parent>
+
+	<groupId>com.sasaki.spark</groupId>
+	<artifactId>working-helper-spark</artifactId>
+	<packaging>jar</packaging>
+	
+	<properties>
+		<local.version>1.1.2</local.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.sasaki.assist</groupId>
+			<artifactId>working-helper-assist</artifactId>
+			<version>${local.version}</version>
+		</dependency>
+	
+		<!-- Spark ${spark.version} -->
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-core_${scala.version}</artifactId>
+			<version>${spark.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.scala-lang</groupId>
+					<artifactId>scala-library</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.scala-lang</groupId>
+					<artifactId>scala-reflect</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.zookeeper</groupId>
+					<artifactId>zookeeper</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-sql_${scala.version}</artifactId>
+			<version>${spark.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.scala-lang</groupId>
+					<artifactId>scala-library</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.scala-lang</groupId>
+					<artifactId>scala-reflect</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.zookeeper</groupId>
+					<artifactId>zookeeper</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-hive_${scala.version}</artifactId>
+			<version>${spark.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.scala-lang</groupId>
+					<artifactId>scala-library</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.scala-lang</groupId>
+					<artifactId>scala-reflect</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-streaming_${scala.version}</artifactId>
+			<version>${spark.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.scala-lang</groupId>
+					<artifactId>scala-library</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.scala-lang</groupId>
+					<artifactId>scala-reflect</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- 注意，添加该依赖后打包异常！！ -->
+		<!-- <dependency> <groupId>org.apache.spark</groupId> <artifactId>spark-streaming-kafka-0-10_${scala.version}</artifactId> 
+			<version>${spark.version}</version> <exclusions> <exclusion> <groupId>org.scala-lang</groupId> 
+			<artifactId>scala-library</artifactId> </exclusion> <exclusion> <groupId>org.scala-lang</groupId> 
+			<artifactId>scala-reflect</artifactId> </exclusion> </exclusions> </dependency> -->
+
+		<dependency>
+			<groupId>${hive.group}</groupId>
+			<artifactId>hive-metastore</artifactId>
+			<version>${hive.version}</version>
+			<scope>${hive.deps.scope}</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>${hive.group}</groupId>
+					<artifactId>spark-client</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>${hive.group}</groupId>
+			<artifactId>hive-exec</artifactId>
+			<version>${hive.version}</version>
+			<scope>${hive.deps.scope}</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>${hive.group}</groupId>
+					<artifactId>spark-client</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-common</artifactId>
+			<version>${hadoop.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-client</artifactId>
+			<version>${hadoop.version}</version>
+		</dependency>
+	</dependencies>
+</project>

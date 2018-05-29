@@ -6,14 +6,13 @@
 	
 	<groupId>com.sasaki</groupId>
 	<artifactId>working-helper</artifactId>
-	<version>${local.version}</version>
-	<packaging>jar</packaging>
-	
+	<version>1.1.2</version>
+	<packaging>pom</packaging>
+	 
 	<name>Working Helper</name>
 	<url>http://maven.apache.org</url>
  
 	<properties>
-		<local.version>1.1.2</local.version>
 		<encoding>UTF-8</encoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -75,140 +74,6 @@
 			<version>${scala.version}.8</version>
 		</dependency>
 			
-		<!-- Spark ${spark.version} -->
-		<dependency>
-			<groupId>org.apache.spark</groupId>
-			<artifactId>spark-core_${scala.version}</artifactId>
-			<version>${spark.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.scala-lang</groupId>
-					<artifactId>scala-library</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.scala-lang</groupId>
-					<artifactId>scala-reflect</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.zookeeper</groupId>
-					<artifactId>zookeeper</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.spark</groupId>
-			<artifactId>spark-sql_${scala.version}</artifactId>
-			<version>${spark.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.scala-lang</groupId>
-					<artifactId>scala-library</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.scala-lang</groupId>
-					<artifactId>scala-reflect</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.zookeeper</groupId>
-					<artifactId>zookeeper</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.apache.spark</groupId>
-			<artifactId>spark-hive_${scala.version}</artifactId>
-			<version>${spark.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.scala-lang</groupId>
-					<artifactId>scala-library</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.scala-lang</groupId>
-					<artifactId>scala-reflect</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>	
-		
-		<dependency>
-			<groupId>org.apache.spark</groupId>
-			<artifactId>spark-streaming_${scala.version}</artifactId>
-			<version>${spark.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.scala-lang</groupId>
-					<artifactId>scala-library</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.scala-lang</groupId>
-					<artifactId>scala-reflect</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<!-- 注意，添加该依赖后打包异常！！ -->
-<!-- 		<dependency>
-			<groupId>org.apache.spark</groupId>
-			<artifactId>spark-streaming-kafka-0-10_${scala.version}</artifactId>
-			<version>${spark.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.scala-lang</groupId>
-					<artifactId>scala-library</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.scala-lang</groupId>
-					<artifactId>scala-reflect</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency> -->
-
-		<dependency>
-			<groupId>${hive.group}</groupId>
-			<artifactId>hive-metastore</artifactId>
-			<version>${hive.version}</version>
-			<scope>${hive.deps.scope}</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>${hive.group}</groupId>
-					<artifactId>spark-client</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency> 
-		
-		<dependency>
-		    <groupId>${hive.group}</groupId>
-		    <artifactId>hive-exec</artifactId>
-	        <version>${hive.version}</version>
-	        <scope>${hive.deps.scope}</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>${hive.group}</groupId>
-					<artifactId>spark-client</artifactId>
-				</exclusion>
-			</exclusions>	        
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.hadoop</groupId>
-			<artifactId>hadoop-common</artifactId>
-			<version>${hadoop.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.hadoop</groupId>
-			<artifactId>hadoop-client</artifactId>
-			<version>${hadoop.version}</version>
-		</dependency> 
-		
-		<dependency>
-		    <groupId>com.typesafe.scala-logging</groupId>
-		    <artifactId>scala-logging-slf4j_${scala.version}</artifactId>
-		    <version>2.1.2</version>
-		</dependency>
-				
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -292,4 +157,10 @@
 			<url>http://mvnrepo.xxxx.com/mvn/snapshots</url>
 		</snapshotRepository> -->
 	</distributionManagement>
+	
+	<modules>
+		<module>working-helper-spark</module>
+		<module>working-helper-assist</module>
+		<module>T</module>
+	</modules>
 </project>

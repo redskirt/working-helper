@@ -102,7 +102,7 @@ trait SparkHandler extends ReflectHandler with LazyLogging {
       f_x() 
     } finally spark.stop
     
-  @deprecated("兼容 Spark-1.* 版本。")
+  @deprecated("For Spark-1.* version.")
   def invokeContextHandler(f_x: () => Unit)(implicit sc: SC) = 
     try f_x() finally sc.stop
     

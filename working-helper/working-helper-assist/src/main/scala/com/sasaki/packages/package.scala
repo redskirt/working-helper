@@ -156,10 +156,10 @@ package object independent {
   def currentFormatDate = 
     new java.text.SimpleDateFormat(PATTERN_DATE).format(new JDate(currentTimeMillis))
 
-  def formatDuration(durationTimeMillis: Long) = 
-    org.apache.commons.lang3.time.DurationFormatUtils.formatDuration(durationTimeMillis, "HH:mm:ss", true)
-    
-  def formatUntilDuration(lastTimeMillis: Long) = formatDuration(currentTimeMillis - lastTimeMillis)
+//  def formatDuration(durationTimeMillis: Long) = 
+//    org.apache.commons.lang3.time.DurationFormatUtils.formatDuration(durationTimeMillis, "HH:mm:ss", true)
+//    
+//  def formatUntilDuration(lastTimeMillis: Long) = formatDuration(currentTimeMillis - lastTimeMillis)
 
   /**
    * 平行映射
