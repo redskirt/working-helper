@@ -6,8 +6,6 @@ import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Map;
 
-import com.sun.xml.internal.ws.util.StringUtils;
-
 /**
  * @Author Wei Liu
  * @Mail wei.liu@suanhua.org
@@ -28,10 +26,10 @@ public class Entity<E> {
 	 * @throws SecurityException 
 	 * @throws NoSuchMethodException 
 	 */
-	public E set(E e, String _attr_, Object _value_) throws Exception {
+	protected <T> E set(E e, String _attr_, T _value_) throws Exception {
 		if (isEmpty(e) || isEmpty(_attr_) || isEmpty(_value_)) throw new NullPointerException("Entity/_attr_/_value_ isNul.");
 		
-		Method method = e.getClass().getMethod(SET + StringUtils.capitalize(_attr_)/*拼接JavaBean Setter*/, _value_.getClass());
+		Method method = e.getClass().getMethod(SET + capitalize(_attr_)/*拼接JavaBean Setter*/, _value_.getClass());
 		method.invoke(e, _value_);
 		
 		return e;
@@ -45,17 +43,17 @@ public class Entity<E> {
 	 * @return
 	 * @throws Exception
 	 */
-	public E setMultiple(E e, Object[][] _attrs_$attrs_) throws Exception {
+	protected <T> E setMultiple(E e, T[][] _attrs_$attrs_) throws Exception {
 		if(isEmpty(_attrs_$attrs_) || _attrs_$attrs_ .length != 2 || _attrs_$attrs_[0].length != _attrs_$attrs_[1].length)
 			throw new Exception("Object[][] _attrs_$attrs_ isNul OR _attrs_ not matched _$attrs_.");
 
-		for (int i = 0; i < _attrs_$attrs_[0].length; i++) set(e, String.valueOf(_attrs_$attrs_[0][i]), _attrs_$attrs_[1][i]);
+		for (int i = 0; i < _attrs_$attrs_[0].length; i++) 
+			set(e, String.valueOf(_attrs_$attrs_[0][i]), _attrs_$attrs_[1][i]);
 
 		return e;
 	}
 	
-
-	public static <T> String toString(T e) throws Exception {
+	protected static <T> String toString(T e) throws Exception {
 		StringBuilder builder = new StringBuilder(e.getClass().getName() + " --> ");
 		Field[] fields = e.getClass().getDeclaredFields();
 		Field.setAccessible(fields, true);
@@ -66,13 +64,29 @@ public class Entity<E> {
 		return builder.toString();
 	}
 	
-	public boolean isEmpty(Object object) {
-		if (object == null) return true;
-		if (object instanceof String && object.toString().trim().length() == 0) return true;
-		if (object.getClass().isArray() && Array.getLength(object) == 0) return true;
-		if (object instanceof Collection && ((Collection<?>) object).isEmpty()) return true;
-		if (object instanceof Map && ((Map<?, ?>) object).isEmpty()) return true;
+	protected boolean isEmpty(Object object) {
+		if (object == null) 
+			return true;
+		if (object instanceof String && object.toString().trim().length() == 0) 
+			return true;
+		if (object.getClass().isArray() && Array.getLength(object) == 0) 
+			return true;
+		if (object instanceof Collection && ((Collection<?>) object).isEmpty()) 
+			return true;
+		if (object instanceof Map && ((Map<?, ?>) object).isEmpty()) 
+			return true;
 		
 		return false;
 	}
+	
+	private static String capitalize(String str) {
+        int strLen;
+        if (str == null || (strLen = str.length()) == 0) {
+            return str;
+        }
+        return new StringBuilder(strLen)
+            .append(Character.toTitleCase(str.charAt(0)))
+            .append(str.substring(1))
+            .toString();
+    }
 }
