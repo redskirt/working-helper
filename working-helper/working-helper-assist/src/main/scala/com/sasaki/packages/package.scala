@@ -35,6 +35,12 @@ package object independent {
   def MUST_NOT_BE_NULL(s: R = "Argument") = s"$s must not be null!"
   def MUST_NOT_BE_EMPTY(s: R = "Argument") = s"$s must not be empty!"
   
+    
+  def invokeVerify[T](condition: Boolean, slogan: String)(g_x: () => T) = {
+    require(condition, slogan)
+    g_x()
+  }
+  
   def invokeVerify[T](f_x: () => Boolean, slogan: String)(g_x: () => T) = {
     require(f_x(), slogan)
     g_x()
@@ -135,27 +141,32 @@ package object independent {
     case _                      => println(s"Invalid json --> $json"); false
   }
 
-  protected val PATTERN_DATE      = "yyyy-MM-dd"
-  protected val PATTERN_TIMESTAMP = "yyyy-MM-dd hh:mm:ss"
+  val TIME_MULLIONS = /*java.time.Instant.now().toEpochMilli()*/ 
+   java.time.Clock.systemUTC().millis()
+  val TODAY = new JDate(TIME_MULLIONS)
   
-  def timestamp(s: String): Option[JTimestamp] =
-    if (nonEmpty(s))
-      if (s.contains($s))
-        Some(new JTimestamp(new JSimpleDateFormat(PATTERN_TIMESTAMP).parse(s).getTime))
-      else
-        Some(new JTimestamp(new JSimpleDateFormat(PATTERN_DATE).parse(s).getTime))
-    else 
-      None
+  object TimePattern extends Enumeration {
+    type  TimePattern = Value
+    val PATTERN_DATE = Value("yyyy-MM-dd")
+    val PATTERN_TIMESTAMP = Value("yyyy-MM-dd hh:mm:ss")
+  }
+  
+  /**
+   * // TODO 方法未测试！
+   */
+  import TimePattern._
+  def timestamp(string: String, pattern: TimePattern): Option[JTimestamp] =
+    pattern match {
+      case PATTERN_DATE      => Some(new JTimestamp(new JSimpleDateFormat(PATTERN_DATE.toString()).parse(string).getTime))
+      case PATTERN_TIMESTAMP => Some(new JTimestamp(new JSimpleDateFormat(PATTERN_TIMESTAMP.toString()).parse(string).getTime))
+    }
+    
+  val currentFormatedDatetime: String = 
+    new JSimpleDateFormat(PATTERN_TIMESTAMP.toString()).format(TODAY)
 
-  def currentTimeMillis = /*java.time.Instant.now().toEpochMilli()*/ 
-     java.time.Clock.systemUTC().millis()
-
-  def currentFormatTime = 
-    new JSimpleDateFormat(PATTERN_TIMESTAMP).format(new JDate(currentTimeMillis))
-
-  def currentFormatDate = 
-    new java.text.SimpleDateFormat(PATTERN_DATE).format(new JDate(currentTimeMillis))
-
+  val currentFormatedDate: String = 
+    new JSimpleDateFormat(PATTERN_DATE.toString()).format(TODAY)
+    
 //  def formatDuration(durationTimeMillis: Long) = 
 //    org.apache.commons.lang3.time.DurationFormatUtils.formatDuration(durationTimeMillis, "HH:mm:ss", true)
 //    
@@ -195,7 +206,7 @@ package object reflect {
       .reflectConstructor(extractConstructor[T])
       .apply(args: _*)
       .asInstanceOf[T]
-
+  
   def extractConstructor[T: TT]: MethodSymbol = 
     typeOf[T].decl(termNames.CONSTRUCTOR).asMethod
 
@@ -337,15 +348,16 @@ package object constant {
   val $u = "_"       // underline
 
   // --------------------------- Java Type -------------------------------
-  import java.{ lang => Java, util => JUtil }
+  import java.{ lang => Java, util => JUtil, sql => JSql }
  
+//  type JObject             = Java.Object
   type JInt                = Java.Integer
   type JLong               = Java.Long
   type JDouble             = Java.Double
   type JBoolean            = Java.Boolean
-  type JTimestamp          = java.sql.Timestamp
+  type JTimestamp          = JSql.Timestamp
   type JSimpleDateFormat   = java.text.SimpleDateFormat
-  type JDate               = JUtil.Date
+  type JDate               = JSql.Date
 
   //  Java Collection
   type JIterable[T]        = Java.Iterable[T]

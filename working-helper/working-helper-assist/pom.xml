@@ -6,15 +6,15 @@
 	<parent>
 		<groupId>com.sasaki</groupId>
 		<artifactId>working-helper</artifactId>
-		<version>1.1.2</version>
+		<version>1.1.3</version>
 	</parent>
-
-	<groupId>com.sasaki.assist</groupId>
+	
 	<artifactId>working-helper-assist</artifactId>
+	<version>1.1.4</version>
 	<packaging>jar</packaging>
 
 	<properties>
-		<local.version>1.1.2</local.version>
+		<local.version>1.1.3</local.version>
 	</properties>
 
 	<dependencies>

@@ -43,12 +43,12 @@ public class Entity<E> {
 	 * @return
 	 * @throws Exception
 	 */
-	protected <T> E setMultiple(E e, T[][] _attrs_$attrs_) throws Exception {
-		if(isEmpty(_attrs_$attrs_) || _attrs_$attrs_ .length != 2 || _attrs_$attrs_[0].length != _attrs_$attrs_[1].length)
+	protected <T> E setMultiple(E e, T[][] _attrs_values_) throws Exception {
+		if(isEmpty(_attrs_values_) || _attrs_values_ .length != 2 || _attrs_values_[0].length != _attrs_values_[1].length)
 			throw new Exception("Object[][] _attrs_$attrs_ isNul OR _attrs_ not matched _$attrs_.");
 
-		for (int i = 0; i < _attrs_$attrs_[0].length; i++) 
-			set(e, String.valueOf(_attrs_$attrs_[0][i]), _attrs_$attrs_[1][i]);
+		for (int i = 0; i < _attrs_values_[0].length; i++) 
+			set(e, String.valueOf(_attrs_values_[0][i]), _attrs_values_[1][i]);
 
 		return e;
 	}
