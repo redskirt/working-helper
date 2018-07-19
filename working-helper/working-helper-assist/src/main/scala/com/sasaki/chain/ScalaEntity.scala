@@ -12,7 +12,8 @@ import java.lang.reflect.Method
  */
 trait ScalaEntity {
   
-   val CLASS_STRING = classOf[String]
+   final val CLASS_STRING = classOf[String]
+   final val CLASS_OBJECT = classOf[Object]
   
   /**
    * 该方法暂不适用对父类继承属性赋值

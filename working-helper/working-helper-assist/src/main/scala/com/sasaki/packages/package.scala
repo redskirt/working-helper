@@ -141,14 +141,16 @@ package object independent {
     case _                      => println(s"Invalid json --> $json"); false
   }
 
-  val TIME_MULLIONS = /*java.time.Instant.now().toEpochMilli()*/ 
+  final val TIME_MULLIONS = /*java.time.Instant.now().toEpochMilli()*/ 
    java.time.Clock.systemUTC().millis()
-  val TODAY = new JDate(TIME_MULLIONS)
+  final val TODAY = new JDate(TIME_MULLIONS)
   
-  object TimePattern extends Enumeration {
+  final object TimePattern extends Enumeration {
     type  TimePattern = Value
     val PATTERN_DATE = Value("yyyy-MM-dd")
     val PATTERN_TIMESTAMP = Value("yyyy-MM-dd hh:mm:ss")
+    
+    def name(o: TimePattern.Value) = o.toString()
   }
   
   /**
@@ -166,12 +168,33 @@ package object independent {
 
   val currentFormatedDate: String = 
     new JSimpleDateFormat(PATTERN_DATE.toString()).format(TODAY)
-    
-//  def formatDuration(durationTimeMillis: Long) = 
-//    org.apache.commons.lang3.time.DurationFormatUtils.formatDuration(durationTimeMillis, "HH:mm:ss", true)
-//    
-//  def formatUntilDuration(lastTimeMillis: Long) = formatDuration(currentTimeMillis - lastTimeMillis)
 
+  //  def formatDuration(durationTimeMillis: Long) =
+  //    org.apache.commons.lang3.time.DurationFormatUtils.formatDuration(durationTimeMillis, "HH:mm:ss", true)
+  //
+  //  def formatUntilDuration(lastTimeMillis: Long) = formatDuration(currentTimeMillis - lastTimeMillis)
+
+  /**
+   * File Operation
+   */
+  def listFiles(url: String) = {
+    import java.io.File
+
+    val t = new File(url)
+    if (t.isDirectory())
+      t.listFiles().filterNot(_.isDirectory())
+    else
+      Array(t)
+  }
+
+  def writeFile(fileNameWithPath: String, content: String) = {
+    import java.io.{ File, FileWriter, BufferedWriter }
+
+    val writer = new BufferedWriter(new FileWriter(new File(fileNameWithPath)))
+    writer.write(content)
+    writer.close()
+  }
+    
   /**
    * 平行映射
    * 对两组序列1->1 映射产出一组序列值
